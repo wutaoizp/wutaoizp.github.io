@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>哈希算法-SHA256</title>
+      <link href="/2022/05/04/ha-xi-suan-fa-sha256/"/>
+      <url>/2022/05/04/ha-xi-suan-fa-sha256/</url>
+      
+        <content type="html"><![CDATA[<h2 id="消息预处理-在计算消息的哈希摘要之前需要对消息进行预处理"><a href="#消息预处理-在计算消息的哈希摘要之前需要对消息进行预处理" class="headerlink" title="消息预处理(在计算消息的哈希摘要之前需要对消息进行预处理)"></a>消息预处理(在计算消息的哈希摘要之前需要对消息进行预处理)</h2><h3 id="对消息进行补码处理-假设消息的二进制编码长度为l位-首先在消息末尾补上一位”1”-然后再补上k个”0”-其中k为下列方程的最小非负整数"><a href="#对消息进行补码处理-假设消息的二进制编码长度为l位-首先在消息末尾补上一位”1”-然后再补上k个”0”-其中k为下列方程的最小非负整数" class="headerlink" title="对消息进行补码处理: 假设消息的二进制编码长度为l位. 首先在消息末尾补上一位”1”, 然后再补上k个”0”, 其中k为下列方程的最小非负整数"></a>对消息进行补码处理: 假设消息的二进制编码长度为l位. 首先在消息末尾补上一位”1”, 然后再补上k个”0”, 其中k为下列方程的最小非负整数</h3><p><img src="https://api2.mubu.com/v3/document_image/1f2cb0f9-a000-4048-bb4f-ccff1c252a5f-17161769.jpg" alt="img"></p><h3 id="举个例子具体说明如何进行补码，以消息“abc”为例："><a href="#举个例子具体说明如何进行补码，以消息“abc”为例：" class="headerlink" title="举个例子具体说明如何进行补码，以消息“abc”为例："></a>举个例子具体说明如何进行补码，以消息“abc”为例：</h3><p><img src="https://api2.mubu.com/v3/document_image/16cece93-667d-4ace-b40d-37af1322e2a6-17161769.jpg" alt="img"></p><p>上图中最后的64位为原来消息序列长度的64位二进制表示(原来长度为24)，这里就存在一个限制原来消息序列长度不可超过2^64(绝大多数情况下这个数已经够大了)</p><h3 id="对补码后的二进制序列进行切块："><a href="#对补码后的二进制序列进行切块：" class="headerlink" title="对补码后的二进制序列进行切块："></a>对补码后的二进制序列进行切块：</h3><p><img src="https://api2.mubu.com/v3/document_image/1076c8b5-7900-447c-a74f-f84d0e760ad0-17161769.jpg" alt="img"></p><p><img src="https://api2.mubu.com/v3/document_image/b662b0a0-ca61-4724-9e44-35fecb288edc-17161769.jpg" alt="img"></p><h2 id="摘要计算主循环"><a href="#摘要计算主循环" class="headerlink" title="摘要计算主循环"></a>摘要计算主循环</h2><h3 id="将上述得到1632bits拓展成6432bits-原先16个32记为w-0-w-1-…-w-15-，后面48个字w-16-w-63-由下面公式得到"><a href="#将上述得到1632bits拓展成6432bits-原先16个32记为w-0-w-1-…-w-15-，后面48个字w-16-w-63-由下面公式得到" class="headerlink" title="将上述得到1632bits拓展成6432bits(原先16个32记为w[0],w[1],…,w[15]，后面48个字w[16]~w[63]由下面公式得到)"></a>将上述得到16<em>32bits拓展成64</em>32bits(原先16个32记为w[0],w[1],…,w[15]，后面48个字w[16]~w[63]由下面公式得到)</h3><p><img src="https://api2.mubu.com/v3/document_image/1d5b6f6c-1bc5-4b70-9bc1-1df934504595-17161769.jpg" alt="img"></p><p><img src="https://api2.mubu.com/v3/document_image/ae69548a-fffe-434b-8921-62573389f878-17161769.jpg" alt="img"></p><h3 id="哈希计算主循环"><a href="#哈希计算主循环" class="headerlink" title="哈希计算主循环"></a>哈希计算主循环</h3><p><img src="https://api2.mubu.com/v3/document_image/2f649fde-56a1-4fbb-a02a-e4f60e939940-17161769.jpg" alt="img"></p><h2 id="Python代码实现-https-gitee-com-wutaoizp-hash-algorithm-sha256-tree-master-SHA256"><a href="#Python代码实现-https-gitee-com-wutaoizp-hash-algorithm-sha256-tree-master-SHA256" class="headerlink" title="Python代码实现:https://gitee.com/wutaoizp/hash-algorithm---sha256/tree/master/SHA256"></a>Python代码实现:<a href="https://gitee.com/wutaoizp/hash-algorithm---sha256/tree/master/SHA256">https://gitee.com/wutaoizp/hash-algorithm---sha256/tree/master/SHA256</a></h2>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客推送相关</title>
+      <link href="/2022/05/04/bo-ke-tui-song-xiang-guan/"/>
+      <url>/2022/05/04/bo-ke-tui-song-xiang-guan/</url>
+      
+        <content type="html"><![CDATA[<h2 id="如何快速将本地文档推送至站点"><a href="#如何快速将本地文档推送至站点" class="headerlink" title="如何快速将本地文档推送至站点"></a>如何快速将本地文档推送至站点</h2><h3 id="删除博客目录下的-deploy-git-和-public-文件夹"><a href="#删除博客目录下的-deploy-git-和-public-文件夹" class="headerlink" title="删除博客目录下的 .deploy_git 和 public 文件夹"></a>删除博客目录下的 .deploy_git 和 public 文件夹</h3><p>清除缓存</p><pre class=" language-bash"><code class="language-bash">$ hexo clean</code></pre><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: [Deployment](</p><p>或者直接：</p><pre class=" language-bash"><code class="language-bash">$ hexo clean <span class="token operator">&amp;&amp;</span> hexo g</code></pre><p>再进行</p><pre class=" language-bash"><code class="language-bash">$ hexo s</code></pre><p>进行本地验证</p><p>最后</p><pre class=" language-bash"><code class="language-bash">$ hexo d</code></pre><p>推送至网页</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2022/05/01/hello-world/"/>
+      <url>/2022/05/01/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
