@@ -1,0 +1,1342 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="UCIe(Universal Chiplet Interconnect Express) spec 1.0(第一章), wutaoのblog">
+    <meta name="description" content="个人博客">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>UCIe(Universal Chiplet Interconnect Express) spec 1.0(第一章) | wutaoのblog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="wutaoのblog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/Tokisaki-Galaxy/res/site/medias/background.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">wutaoのblog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">wutaoのblog</div>
+        <div class="logo-desc">
+            
+            个人博客
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">UCIe(Universal Chiplet Interconnect Express) spec 1.0(第一章)</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-11-01
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="UCIe-Universal-Chiplet-Interconnect-Express-spec-1-0"><a href="#UCIe-Universal-Chiplet-Interconnect-Express-spec-1-0" class="headerlink" title="UCIe(Universal Chiplet Interconnect Express) spec 1.0"></a><font color="green" size="72">UCIe(Universal Chiplet Interconnect Express) spec 1.0</font></h1><h1 id="第一章"><a href="#第一章" class="headerlink" title="(第一章)"></a>(第一章)</h1><h2 id="1-0-Introduction"><a href="#1-0-Introduction" class="headerlink" title="1.0 Introduction"></a>1.0 Introduction</h2><p>此章节提供UCIe架构的一个概览。UCIe是一个开放，多协议支持，包交换的同封装上多die互联的标准，用于在同一个封装上连接多个die。此标准的意在打造一个充满活力的生态系统，支持可可使用UCIe互联的多die结构。UCIe在公共物理层与链路层上支持多种协议（PCIe 、CXL和可用于映射任何所选择协议的原始模式，只要两端都支持）。它包含构建SoC所需要的元素，比如应用层，以及与封装相关的物理因素（bump位置，功耗传输，散热方案）。该协议规范的定义是为了确保具有不同性能特征的各种设备之间的互操作性。提供了明确定义的调试和合规机制以确保互操作性。预计此协议规范将会以向后兼容的方式发展。</p>
+<p>尽管UCIe支持广泛的使用模型，但是一些模型是为了说明其可以在计算行业中能够引领的功能创新。最初始能够映射到UCIe的协议是PCIe与CXL。所有协议的映射工作是通过Flit格式实现的，包括原始模式也是。PCIe和CXL在业界都被广泛使用，在UCIe中通过UCIe Adapter和PHY替换原有的PCIe SerDes PHY和PCIe/CXL 逻辑PHY以及链路级别重传功能来实现更多的封装集成方式，以提高功耗和性能特性。UCIe还支持与协议无关的原始模式，以支持映射其他的协议；同时允许在封装上额外集成独立的SerDes收发模块。</p>
+<p><strong>图1</strong>展示了一个SoC的封装，其中包含了通过UCIe连接的CPU Die，其他用途的加速器 Die和I/O Die。加速器Die或I/O Die能够通过运行在UCIe上的CXL与CPU Die相连接，能够实现CXL的I/O、一致性与内存协议（<a href="https://link.zhihu.com/?target=http://CXL.io">http://CXL.io</a>、CXL.cache、CXL.mem）。I/O块能够提供面向外部的CXL引脚、PCIe引脚与DDR引脚。加速器Die也可以使用运行在UCIe的PCIe事务连接到CPU。封装上的CPU Die与CPU Die也可以通过UCIe进行互联，实现一致性协议。</p>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7TrKe.png"></p>
+<center>图1 通过UCIe连接的由CPU Die，加速器Die，和I/O Die组成的封装</center>
+
+<p>UCIe Retimer能够用于把UCIe的连接拓展到封装之外的其他封装互联。封装之外的互联方式包括电缆或光缆或其他任何的用于机架级别的连接方式，如图2所示。UCIe协议规范要求UCIe Retimer部署在UCIe的本地封装接口上并且保证在两个封装之间的Die与Die交互的Flit是依照UCIe协议并且使用相应的通道拓展技术。（The UCIe specification requires the UCIe Retimer to implement the UCIe interface to the die that it connects on its local package and ensure that the Flits are delivered across the two dies across the packages following UCIe protocol using the channel extension technology of its choice.）</p>
+<p><strong>图2</strong>给出了使用CXL 2.0或更高版本协议的机架级别互联的示意图。<strong>图2a</strong>展示了一个机架级别的示意图，其中来自不同计算机刀片服务器的多个计算节点连接到交换机，同时该交换机连接到多个CXL加速器/type-3内存设备，同时上述的所有设备都能够防止在一个或多个抽屉式的机箱中。这种连接的逻辑关系如<strong>图2b</strong>所示，其中每一个host（H1、H2、…)都是上述的抽屉式机箱。每一个抽屉式机箱都通过UCIe Retimer使用封装外的CXL协议互联与交换机进行连接，如<strong>图2c</strong>所示。交换机同时具有封装在一起的Retimer，Retimer通过UCIe与同一封装下的交换机进行连接，Retimer的另一侧是通过PCIe/CXL的物理接口连接到其他封装的加速器/内存设备，如图2c所示。</p>
+<p><img src="https://s1.ax1x.com/2022/11/01/x77dds.png"></p>
+<center>图2 UCIe 能够在机架层面提供远距离的连接<center>
+
+<p>此版本的UCIe协议不涉及3D封装。它允许两种不同的封装形式：标准封装（2D）和高级封装（2.5D）。这样就涵盖了从成本优先的选项到性能优先的选项。</p>
+<ul>
+<li>标准封装：这种封装方式常用于低成本与在有机封装基板上实现长距离通信（10mm-25mm）的场景，但与封装外的SerDes通信方式相比能够提供更加好的误码率特性。图3展示了一个使用标准封装的例子。<strong>表4</strong>展示了使用标准封装的UCIe协议的传输特性。</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7TcVA.png"></p>
+<center>图3 标准封装接口 <center>
+
+<p><img src="https://s1.ax1x.com/2022/11/01/x7T25t.png"></p>
+<center>表4 UCIe标准封装下的特性
+
+<ul>
+<li>高级封装：此封装提供了一种聚焦于高性能的应用场景。因此为了得到更高的带宽与更低的时延与更优秀的能耗比，牺牲了传输距离（小于2mm）。<strong>图4图5图6</strong>展示了使用高级封装的例子。<strong>表5</strong>展示了使用高级封装的UCIe协议的传输特性。</li>
+</ul>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7TWPP.png"></p>
+<center>图4&amp;图5&amp;图6 三种不同的高级封装接口
+
+<p><img src="https://s1.ax1x.com/2022/11/01/x7TgUI.png"></p>
+<center>表5 高级封装接口的特性
+
+<h3 id="1-1-UCIe-Components"><a href="#1-1-UCIe-Components" class="headerlink" title="1.1 UCIe Components"></a>1.1 UCIe Components</h3><p>UCIe是一个分层实现的协议，每一层都有其特定的功能实现。<strong>图7</strong>展示了UCIe协议栈的三个主要部分以及各层之间的功能划分。UCIe协议栈中的每一个部分都需要支持其所宣告的功能与数据带宽。</p>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7T4xS.png"></p>
+<center>UCIe的功能层级
+
+<h4 id="1-1-1-Protocol-Layer"><a href="#1-1-1-Protocol-Layer" class="headerlink" title="1.1.1 Protocol Layer"></a>1.1.1 Protocol Layer</h4><p>虽然协议层与特定的应用程序有着强相关，UCIe协议规范提供了通过UCIe链路传输CXL或PCIe协议的例子。UCIe支持以下协议以启用不同的应用场景：</p>
+<ul>
+<li>PCIe协议规范中定义的PCIe 6.0 Flit 模式。</li>
+<li>CXL协议规范中定义的CXL 2.0和更高版本的协议。</li>
+<li>Streaming协议：此模式为使用UCIe传输的用户自定义的协议提供了通用的传输模式。</li>
+</ul>
+<p>对于上述的每一个协议，通过UCIe传输时可以使用不同的优化与相关的Flit传输方式。第2章与第3章将会对不同协议的细节与Flit格式。</p>
+<h4 id="1-1-2-Die-To-Die-Adapter"><a href="#1-1-2-Die-To-Die-Adapter" class="headerlink" title="1.1.2 Die-To-Die Adapter"></a>1.1.2 Die-To-Die Adapter</h4><p>D2D Adapter在UCIe链路中负责协调协议层与物理层之间成功地进行数据传输功能。它尽可能地减少主要数据路径上的逻辑，为协议Flit提供低延迟，高度优化的数据路径。在传输CXL协议时，多个协议module同时实现所需要的ARB/MUX功能也是由D2D Adapter提供的。对于原始误码率小于1e-27的场景，Adapter能够实现CRC校验码检测与重传功能以保证误码率指标。重传的规则请查阅第3.7节。</p>
+<p>D2D Adapter负责与远程链路伙伴协调更高级别的链路状态机与bring up、协议选项相关参数交换，以及与远程链路伙伴进行电源管理。第3章讲述了D2D Adapter相关内容。</p>
+<h4 id="1-1-3-Physical-Layer"><a href="#1-1-3-Physical-Layer" class="headerlink" title="1.1.3 Physical Layer"></a>1.1.3 Physical Layer</h4><p>物理层的子部分如<strong>图8</strong>所示。</p>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7Th28.png"></p>
+<center>图8 物理层组件
+
+<p>UCIe在物理bump上的主要数据路径按组别划分，每一组中有多个lane，每一组被称为Module。一个Module是UCIe中AFE的最小粒度单位。标准封装和高级封装中每个模块的lane数量在第4章中讲述。一个给定的协议层或D2D Adapter能够通过多个Module进行数据传输。</p>
+<p>UCIe的物理链路由两个部分组成：</p>
+<ul>
+<li>Sideband（边带）：</li>
+</ul>
+<p>此连接用于参数交换，寄存器访问与和远程链路伙伴进行协调设置和管理。其每个传输方向都由对应的时钟信号引脚与数据信号引脚组成。无论主带数据路径的传输速度如何，边带时钟信号都固定在800Mhz。UCIe物理层的边带逻辑必须使用备用电源和处于”always on”的电源域中。每个module都拥有属于自己的边带信号引脚。</p>
+<p>对于高级封装，每个方向上的边带信号引脚都有对应冗余引脚以用于故障修复。</p>
+<ul>
+<li>Mainband（主带）：</li>
+</ul>
+<p>此连接组成了UCIe的主要数据路径。其中每个module由一个时钟信号，一个数据有效信号和N个数据lane组成。</p>
+<p>对于采用高级封装的场景，上述数据lane的数量N为64，同时有额外的4个用于故障修复的冗余数据lane。</p>
+<p>对于采用标准封装的场景，上述数据lane的数量N为16，但并没有额外用于故障修复的冗余数据lane。</p>
+<p>逻辑物理层通过不同的功能和相关执行顺序建立起适当的链路管理功能与数据传输功能。（例如边带传输，主带训练或主带修复）。第4章与第5章讲述了物理层操作的相关细节。</p>
+<h4 id="1-1-4-Interfaces"><a href="#1-1-4-Interfaces" class="headerlink" title="1.1.4 Interfaces"></a>1.1.4 Interfaces</h4><p>UCIe定义物理层与D2D Adapter之间的接口为RDI（Raw D2D Interface），定义D2D Adapter与协议层之间的接口为FDI（Flit-aware D2D Interface），详细请参详第8章。</p>
+<p>执行如此定义的原因如下：</p>
+<ul>
+<li>允许供应商与SoC制造商能够以较低的成本和更快的上市时间以混合和匹配来自不同供应商的不同层级。例如，让协议层与D2D Adapter和来自其他不同供应商的且符合本协议规范中定义的接口的物理层一起工作。</li>
+<li>考虑到硅后验证的巨大开销与成本，对于此协议规范中所定义的接口拥有一致的BFM理解和开发能够使得支持UCIe的IP开发更简单。</li>
+</ul>
+<h3 id="1-2-UCIe-Configurations"><a href="#1-2-UCIe-Configurations" class="headerlink" title="1.2 UCIe Configurations"></a>1.2 UCIe Configurations</h3><p>此部分讲述UCIe中不同的配置与排列。</p>
+<h4 id="1-2-1-Single-Module-Configuration"><a href="#1-2-1-Single-Module-Configuration" class="headerlink" title="1.2.1 Single Module Configuration"></a>1.2.1 Single Module Configuration</h4><p>使用标准封装的单module实现方式提供16个数据lane，如<strong>图9</strong>所示。使用高级封装的单module实现方式提供64个数据lane，如<strong>图10</strong>所示。如果同时例化多个单module，每一个module需要独立运行，比如运行在不同的传输频率下。</p>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7TorQ.png"></p>
+<center>图9 高级封装下的单模块配置
+
+<p><img src="https://s1.ax1x.com/2022/11/01/x7TIKg.png"></p>
+<center>图10 标准封装下的单模块配置
+
+<h4 id="1-2-2-Multi-Module-Configuration"><a href="#1-2-2-Multi-Module-Configuration" class="headerlink" title="1.2.2 Multi Module Configuration"></a>1.2.2 Multi Module Configuration</h4><p>此协议允许2个或4个module的配置方式。处于multi-module下的子module不能单独运行。<strong>图11</strong>和<strong>图12</strong>分别展示了2个和4个module配置的实例。</p>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7TTbj.png"></p>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7THVs.png"></p>
+<center>图11&amp;图12标准封装下的多模块配置
+
+<h3 id="1-3-UCIe-Retimers"><a href="#1-3-UCIe-Retimers" class="headerlink" title="1.3 UCIe Retimers"></a>1.3 UCIe Retimers</h3><p>如前面所描述，UCIe Retimer用于支持不同类型的封装互联，以拓展处于不同封装中的两个UCIe Die之间进行互联。每一个UCIe Retimer拥有一个本地UCIe链路以连接本地UCIe Die，同时拥有一个外部的UCIe链路以连接其他片外的封装片。<strong>图13</strong>展示了一个利用UCIe Retimer进行不同封装片外的UCIe Die 0与UCIe Die1之间互联的例子。UCIe Retimer 0和UCIe Die 0通过UCIe 链路0在封装0上相连接。UCIe Retimer 1和UCIe Die 1通过UCIe 链路0在封装1上相连接。术语“remote Retimer partner”（远程Retimer伙伴）用于指代连接到封装外的互联远端的UCIe Retimer Die。</p>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7Tban.png"></p>
+<center>图13 UCIe Retimer的模块层级连接图
+
+<p>UCIe Retimer的职责包括如下：</p>
+<p>提供可靠的跨封装Flit传输，以下三种选项用于实现此职责：</p>
+<ul>
+<li>Retimer能够使用当前所进行传输的协议（如PCIe或CXL）底层定义的FEC与CRC进行传输保障，前提是使用的封装外连接能够正确识别当前协议栈下传输中可能出现的错误模型。此时UCIe链路将会被设置为使用原始模式来传输其所使用的协议的bit流。在这种情况下，需要在UCIe Die上调整队列大小以满足底层数据往返延迟。</li>
+<li>Retimer允许提供必要的FEC，CRC和重传功能以满足片外互联的误码率要求。在这样的情况下，Flit将会通过三个独立的链路传输。每一个UCIe Retimer对其同一封装下的UCIe Die执行独立的Ack/Nak握手并且与远程Retimer伙伴也执行独立的Ack/Nak握手。</li>
+<li>Retimer通过使用自定义的FEC替代原有PCIe或CXL定义的FEC，或者在已有PCIe或CXL定义的FEC的基础上增加自定义的FEC，但使用当前底层协议实现的CRC和重传机制。在这种情况下，需要在UCIe Die上调整队列大小以满足底层数据往返延迟。</li>
+<li>与远程Retimer伙伴解决链路和协议的参数以保证UCIe Die端到端之间的互操作性。例如，允许Retimer在图13中的封装0与封装1上强制使用相同的链路宽度、速度、协议（包括任何相关的协议特定参数）和Flit格式。具体的解析机制包括不同封装之间的参数交换引发的信息传输的实现方式需要依据具体Retimer情况而言，并且需要保证所使用的信息交互方式能够被两边的封装都能支持。然而，为了确保UCIe链路的鲁棒性，以避免由于通过片外互联与远程Retimer伙伴进行参数交互通信时引致的长时间等待而触发不必要的超时，UCIe 协议规范定义了“Stall”的响应方式以等待可能出现延迟的边带信息。Retimer需要依照UCIe规范中定义的规则响应”Stall”以避免在与远程Retimer伙伴进行协商或等待其响应时出现不必要的超时。Retimer有责任确保UCIe链路不会无限期停止。</li>
+<li>与远程Retimer伙伴协同对Adapter链路状态与RDI状态进行解析以确保端到端操作符合规范。参考第3章以获得更多信息。</li>
+</ul>
+<p>对于流控与反压机制：</p>
+<ul>
+<li>从UCIe Die发送到UCIe Retimer的数据流控机制通过Credits实现。这些Credit是基于已有的底层协议的Credit机制（比如PCIe中的PRH与PRD credit）。这些UCIe D2D credit需要被用于跨越两个UCIe Retimer的流控并且传输到UCIe Retimer的任何数据最终必须要由远程UCIe Die所使用，而不是被其他设备使用。每一个UCIe Retimer需要为从其同一封装内的UCIe Die接收到的Flit实现一个接收缓冲区（Receive Buffer）。接收缓冲器的credit需要在初始参数交换时宣布到UCIe Die上，并且UCIe Die在收到接收缓冲器的credit前不能够往Retimer发送任何的数据。一个credit对应着256字节的数据（包括所有的FEC、CRC）。在每次传输完成之后将会根据valid信号重载credit数量（参照第4.1.2节）。当RDI状态从Active跳出时，credit计数器将会回退到初始宣布的数值。UCIe Retimer需要在RDI重新进入Active状态前清空或转移其接收缓冲器中的数据。</li>
+<li>在D2D Adapter层中从UCIe Retimer传输到UCIe Die将不会受到流控的限制。如果需要实现流控，UCIe Retimer可以与另一个UCIe Retimer建立独立地流控机制，这内容超过了本协议规范的范围。</li>
+</ul>
+<h3 id="1-4-UCIe-Key-Performance-Targets"><a href="#1-4-UCIe-Key-Performance-Targets" class="headerlink" title="1.4 UCIe Key Performance Targets"></a>1.4 UCIe Key Performance Targets</h3><p>表6给出了UCIe的性能目标。</p>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7TOP0.png"></p>
+<center>表6 UCIe的关键性能指标
+
+<ol>
+<li>Die Edge Bandwidth Density（第5章中定义）为45um（高级封装）和110um（标准封装）的bump pitch。</li>
+<li>Energy Efficiency包含所有物理层相关的电路：发送，接收，锁相环，时钟分配等。通道长短带来不同的能耗将会在第5章中讨论。</li>
+<li>Latency包含Adapter上的延时与物理层发送与接收的延时。参照第5章以得到更多关于物理层时延的内容。</li>
+</ol>
+<h3 id="1-5-Interoperability"><a href="#1-5-Interoperability" class="headerlink" title="1.5 Interoperability"></a>1.5 Interoperability</h3><p>封装设计者需要确保连接在封装上的Die能够互相操作。这包括采用兼容性的封装互联（标准封装或高级封装）、协议、电压等级等。强烈建议Die的发送电压小于0.85V；这样他们就可以在可预见的未来与更多的工艺节点继续宁互联操作。</p>
+<p>此协议规范涵盖了针对高级封装的各种bump pitch范围的互操作性。预计随着时间的推移，使用的bump pitch将会越来越小。通过更小的bump pitch，设计能够降低传输频率以优化面积，并且在减少面积的情况解决高带宽传输的功率传输与热限制。<strong>表7</strong>中总结了4组对应的bump pitch。</p>
+<p>依据第5章中讲述的PHY定义，保证了每个组内以及跨组的互操作性。<strong>表6</strong>中提供的性能指标采用45um的bump pitch，这是基于此协议发布时广泛采用的技术。</p>
+<p><img src="https://s1.ax1x.com/2022/11/01/x7Tq5q.png"></p>
+<center>表7 不同凹凸间距的组合</center></center></center></center></center></center></center></center></center></center></center></center></center></center></center>
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">故里的梦</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://wutaoizp.github.io/2022/11/01/ucie-specification-revision-1.0/">https://wutaoizp.github.io/2022/11/01/ucie-specification-revision-1.0/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">故里的梦</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: null,
+        id: '2022-11-01T15-42-27',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/11/01/shang-chuan-git-gitee/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="上传git-&gt;gitee">
+                        
+                        <span class="card-title">上传git-&gt;gitee</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            故里的梦
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/10/27/lowrisc-verilog-bian-ma-feng-ge-zhi-nan/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="lowRISC Verilog 编码风格指南">
+                        
+                        <span class="card-title">lowRISC Verilog 编码风格指南</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            故里的梦
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="tencent"
+                   type="playlist"
+                   id="8463251865"
+                   fixed='true'
+                   autoplay='true'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022</span>
+            
+            <span id="year">2022</span>
+            <a href="/about" target="_blank">故里的梦</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2207982844@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2207982844" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2207982844" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
